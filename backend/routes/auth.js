@@ -108,7 +108,7 @@ router.post("/login", async (req, res) => {
     { email },
     process.env.REFRESH_TOKEN_SECRET,
     {
-      expiresIn: "1m",
+      expiresIn: "20s",
     }
   );
 
@@ -123,7 +123,9 @@ router.post("/login", async (req, res) => {
 let refreshTokens = [];
 
 router.post("/token", async (req, res) => {
-  const refreshToken = req.header("x-auth-token");
+  // const refreshToken = req.header("x-auth-token");
+
+  const refreshToken = req.body.refreshToken;
 
   if (!refreshToken) {
     res.status(401).json({
@@ -168,11 +170,10 @@ router.post("/token", async (req, res) => {
   }
 });
 
-
 router.delete("/logout", (req, res) => {
-    const refreshToken = req.header("x-auth-token");
-    refreshTokens = refreshTokens.filter((token)=> token !== refreshToken);
-    res.sendStatus(204);
-})
+  const refreshToken = req.header("x-auth-token");
+  refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+  res.sendStatus(204);
+});
 
 module.exports = router;

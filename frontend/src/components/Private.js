@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 import postService from "../services/postService";
-import authService from "../services/authService";
+// import authService from "../services/authService";
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [privatePosts, setPrivatePosts] = useState([]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -19,12 +19,12 @@ const Home = () => {
       (error) => {
         console.log("Private page", error.response);
 
-        if (error.response && error.response.status === 403) {
+        // if (error.response && error.response.status === 403) {
 
-          authService.logout();
-          navigate("/login");
-          window.location.reload();
-        }
+        //   authService.logout();
+        //   navigate("/login");
+        //   window.location.reload();
+        // }
       }
     );
   }, []);
